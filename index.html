@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfiniteTechs — Coming Soon</title>
+  <meta name="description" content="Infinite Technologies builds digital products engineered for small businesses that mean business. Coming soon to www.infinitechs.online." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="InfiniteTechs — Something Big Is Coming" />
+  <meta property="og:description" content="Digital products engineered for small businesses that mean business." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.infinitechs.online" />
+  <meta property="og:site_name" content="InfiniteTechs" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS CUSTOM PROPERTIES ─────────────────────────────── */
+    :root {
+      --bg:          #080A0F;
+      --bg-alt:      #0C0F16;
+      --cyan:        #00F0FF;
+      --amber:       #FFB830;
+      --white:       #F0EEE8;
+      --muted:       #6B7280;
+      --border:      rgba(240, 238, 232, 0.08);
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+
+      --section-gap: clamp(5rem, 10vw, 9rem);
+      --container:   min(1200px, 92vw);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: var(--font-mono);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── BACKGROUND TEXTURE ────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        /* noise grain via SVG filter */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
+        /* diagonal grid lines */
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 48px,
+          rgba(0, 240, 255, 0.018) 48px,
+          rgba(0, 240, 255, 0.018) 49px
+        ),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 48px,
+          rgba(0, 240, 255, 0.012) 48px,
+          rgba(0, 240, 255, 0.012) 49px
+        );
+    }
+
+    /* ─── LAYOUT HELPERS ────────────────────────────────────── */
+    .container {
+      width: var(--container);
+      margin-inline: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─────────────────────────────────────────────────────────
+       HEADER / NAV
+    ───────────────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    header.scrolled {
+      background: rgba(8, 10, 15, 0.88);
+      backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .logo-symbol {
+      color: var(--cyan);
+      font-size: 1.3rem;
+      line-height: 1;
+      display: inline-block;
+    }
+    .logo-text span { color: var(--cyan); }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+
+    /* Rotating wireframe shape */
+    .geo-shape {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(70vw, 640px);
+      height: min(70vw, 640px);
+      opacity: 0.055;
+      animation: slowRotate 38s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .geo-shape svg {
+      width: 100%;
+      height: 100%;
+    }
+    @keyframes slowRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(2rem, 6vw, 4rem) 0;
+    }
+
+    /* Status badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 0.3rem 0.75rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: blink 1.2s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Stacked headline */
+    .hero-headline {
+      font-family: var(--font-display);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      margin-bottom: 2.2rem;
+    }
+    .hero-headline .line {
+      display: block;
+      font-size: clamp(5rem, 14vw, 13rem);
+      color: var(--white);
+    }
+    .hero-headline .line-outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--white);
+    }
+    .hero-headline .line-accent {
+      color: var(--cyan);
+    }
+
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--muted);
+      max-width: 52ch;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      margin-bottom: 3rem;
+    }
+    .hero-sub strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* Domain bar */
+    .hero-domain-bar {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 0;
+      right: 0;
+      z-index: 2;
+    }
+    .hero-domain-inner {
+      width: var(--container);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .domain-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .domain-text {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       WHAT WE DO
+    ───────────────────────────────────────────────────────── */
+    #what {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      max-width: 60px;
+      background: var(--cyan);
+      opacity: 0.7;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      letter-spacing: 0.01em;
+      color: var(--white);
+      margin-bottom: 4rem;
+      line-height: 1;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-left: 1px solid var(--border);
+    }
+    @media (max-width: 720px) {
+      .pillars {
+        grid-template-columns: 1fr;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    .pillar {
+      padding: clamp(1.8rem, 4vw, 2.6rem) clamp(1.4rem, 3vw, 2.4rem);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      transition: background 0.25s;
+    }
+    .pillar:hover { background: rgba(0, 240, 255, 0.022); }
+    @media (max-width: 720px) {
+      .pillar {
+        border-right: none;
+        border-left: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .pillar-number {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .pillar-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 1.4rem;
+      color: var(--cyan);
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+
+    .pillar-desc {
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Corner accent */
+    .pillar::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 8px;
+      height: 8px;
+      background: var(--bg);
+      border-top: 1px solid var(--cyan);
+      border-left: 1px solid var(--cyan);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .pillar:hover::after { opacity: 1; }
+
+    /* ─────────────────────────────────────────────────────────
+       EMAIL CAPTURE
+    ───────────────────────────────────────────────────────── */
+    #notify {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .notify-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .notify-inner { grid-template-columns: 1fr; }
+    }
+
+    .notify-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+    .notify-title .accent { color: var(--cyan); }
+    .notify-title .amber { color: var(--amber); }
+
+    .notify-form-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .notify-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.65;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid rgba(240, 238, 232, 0.25);
+      transition: border-color 0.2s;
+    }
+    .form-row:focus-within { border-color: var(--cyan); }
+
+    .email-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0.8rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      caret-color: var(--cyan);
+    }
+    .email-input::placeholder { color: var(--muted); }
+
+    .submit-btn {
+      background: var(--cyan);
+      color: var(--bg);
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.8rem 1.4rem;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: 0.8rem;
+    }
+    .submit-btn:hover {
+      background: var(--white);
+    }
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .form-success {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      padding: 0.5rem 0;
+    }
+    .form-success.show { display: block; }
+
+    /* ─────────────────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy,
+    .footer-domain {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-domain:hover { color: var(--cyan); }
+
+    /* ─────────────────────────────────────────────────────────
+       UTILITIES
+    ───────────────────────────────────────────────────────── */
+    ::selection {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ──────────────────────────────────────────── -->
+  <header id="site-header">
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="InfiniteTechs home">
+        <span class="logo-symbol" aria-hidden="true">∞</span>
+        <span class="logo-text">Infinite<span>Techs</span></span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#what">About</a>
+        <a href="mailto:serhaniachraf1@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────────── -->
+  <section id="hero" aria-label="Hero">
+
+    <!-- Rotating wireframe octagon -->
+    <div class="geo-shape" aria-hidden="true">
+      <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer octagon -->
+        <polygon
+          points="191,15 309,15 445,138 445,362 309,485 191,485 55,362 55,138"
+          stroke="#00F0FF" stroke-width="1" fill="none"
+        />
+        <!-- inner octagon -->
+        <polygon
+          points="210,75 290,75 390,162 390,338 290,425 210,425 110,338 110,162"
+          stroke="#00F0FF" stroke-width="0.6" fill="none"
+        />
+        <!-- cross lines -->
+        <line x1="55" y1="250" x2="445" y2="250" stroke="#00F0FF" stroke-width="0.5"/>
+        <line x1="250" y1="15" x2="250" y2="485" stroke="#00F0FF" stroke-width="0.5"/>
+        <line x1="191" y1="15" x2="309" y2="485" stroke="#00F0FF" stroke-width="0.3"/>
+        <line x1="309" y1="15" x2="191" y2="485" stroke="#00F0FF" stroke-width="0.3"/>
+        <!-- center circle -->
+        <circle cx="250" cy="250" r="60" stroke="#00F0FF" stroke-width="0.6" fill="none"/>
+        <circle cx="250" cy="250" r="4" fill="#00F0FF" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="container hero-content">
+
+      <div class="hero-badge reveal">
+        Status &mdash; Launching Soon
+      </div>
+
+      <h1 class="hero-headline reveal reveal-delay-1">
+        <span class="line">SOMETHING</span>
+        <span class="line line-outline">BIG</span>
+        <span class="line line-accent">IS COMING.</span>
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        Digital products <strong>engineered for small businesses</strong> that mean business. Built for the real world. Designed for yours.
+      </p>
+
+    </div>
+
+    <!-- Domain bar -->
+    <div class="hero-domain-bar" aria-hidden="true">
+      <div class="hero-domain-inner">
+        <div class="domain-rule"></div>
+        <span class="domain-text">www.infinitechs.online</span>
+        <div class="domain-rule"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── WHAT WE DO ───────────────────────────────────────── -->
+  <section id="what" aria-label="What we do">
+    <div class="container">
+
+      <p class="section-label reveal">What We Do</p>
+      <h2 class="section-title reveal reveal-delay-1">THE TOOLS<br>YOU NEED.</h2>
+
+      <div class="pillars">
+
+        <article class="pillar reveal">
+          <p class="pillar-number">01 /</p>
+          <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 18 L12 12 L18 18 L24 10 L30 16"/>
+            <rect x="4" y="4" width="28" height="28" rx="2"/>
+            <line x1="4" y1="26" x2="32" y2="26"/>
+          </svg>
+          <h3 class="pillar-title">AUTOMATE OPERATIONS</h3>
+          <p class="pillar-desc">Kill the manual grind. We build systems that run your back-office so you can focus on what only you can do.</p>
+        </article>
+
+        <article class="pillar reveal reveal-delay-1">
+          <p class="pillar-number">02 /</p>
+          <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="14" r="6"/>
+            <path d="M6 30 C6 24 10 20 18 20 C26 20 30 24 30 30"/>
+            <line x1="22" y1="10" x2="28" y2="6"/>
+            <line x1="28" y1="6" x2="30" y2="10"/>
+          </svg>
+          <h3 class="pillar-title">SELL SMARTER</h3>
+          <p class="pillar-desc">Digital storefronts, booking flows, and sales tools designed for conversion — not complexity.</p>
+        </article>
+
+        <article class="pillar reveal reveal-delay-2">
+          <p class="pillar-number">03 /</p>
+          <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="8" width="28" height="20" rx="2"/>
+            <line x1="4" y1="14" x2="32" y2="14"/>
+            <line x1="10" y1="8" x2="10" y2="28"/>
+            <circle cx="23" cy="21" r="3"/>
+            <line x1="26" y1="21" x2="30" y2="21"/>
+          </svg>
+          <h3 class="pillar-title">MANAGE EFFORTLESSLY</h3>
+          <p class="pillar-desc">Dashboards, inventory, and client tools with zero learning curve. If it's not intuitive, we rebuild it.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EMAIL CAPTURE ────────────────────────────────────── -->
+  <section id="notify" aria-label="Stay in the loop">
+    <div class="container">
+      <div class="notify-inner">
+
+        <div>
+          <p class="section-label reveal">Early Access</p>
+          <h2 class="notify-title reveal reveal-delay-1">
+            BE THE<br>
+            <span class="accent">FIRST</span><br>
+            TO KNOW<span class="amber">.</span>
+          </h2>
+        </div>
+
+        <div class="notify-form-wrap reveal reveal-delay-1">
+          <p class="notify-desc">We launch in phases. Get early access, product updates, and a front-row seat to what we're building.</p>
+
+          <form id="notify-form" novalidate>
+            <div class="form-row">
+              <input
+                type="email"
+                class="email-input"
+                id="email-input"
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
+                aria-label="Email address"
+              />
+              <button type="submit" class="submit-btn" id="submit-btn">
+                Notify Me
+              </button>
+            </div>
+            <p class="form-success" id="form-success" role="status" aria-live="polite">
+              ✓ You're on the list. We'll be in touch.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-copy">&copy; 2025 Infinite Technologies</span>
+      <a href="https://www.infinitechs.online" class="footer-domain">www.infinitechs.online</a>
+    </div>
+  </footer>
+
+  <!-- ─── JAVASCRIPT ───────────────────────────────────────── -->
+  <script>
+    /* Header scroll effect */
+    const header = document.getElementById('site-header');
+    const onScroll = () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Scroll reveal via IntersectionObserver */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* Email form */
+    const form = document.getElementById('notify-form');
+    const emailInput = document.getElementById('email-input');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('form-success');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(val)) {
+        emailInput.style.caretColor = '#FFB830';
+        emailInput.focus();
+        return;
+      }
+      emailInput.style.caretColor = '';
+      submitBtn.disabled = true;
+      emailInput.disabled = true;
+      successMsg.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
