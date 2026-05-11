@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refund Policy – Infinite Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #0f0f0f;
+      --muted: #5a5a6a;
+      --accent: #1a56db;
+      --bg: #fafaf8;
+      --border: #e4e4e0;
+      --card: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: #eef3ff;
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      border: 1px solid #c7d9ff;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      margin: 2.5rem 0 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    h2::before {
+      content: '§';
+      color: var(--accent);
+      margin-right: 0.5rem;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+    p { color: #2d2d3a; margin-bottom: 1rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 1rem; color: #2d2d3a; }
+    ul li { margin-bottom: 0.4rem; }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    a:hover { border-color: var(--accent); }
+    .callout {
+      background: #f0f4ff;
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+      color: #1a2a5e;
+    }
+    .callout.green {
+      background: #f0faf4;
+      border-left-color: #16a34a;
+      color: #14532d;
+    }
+    .callout.red {
+      background: #fff5f5;
+      border-left-color: #dc2626;
+      color: #7f1d1d;
+    }
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.45rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem;
+      top: 0.45rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      outline: 2px solid var(--accent);
+    }
+    .timeline-item strong { display: block; font-size: 0.95rem; }
+    .timeline-item span { font-size: 0.875rem; color: var(--muted); }
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+      counter-reset: steps;
+    }
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem;
+      counter-increment: steps;
+      position: relative;
+    }
+    .step-card::before {
+      content: counter(steps);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .step-card strong { display: block; font-size: 0.875rem; margin-bottom: 0.25rem; }
+    .step-card span { font-size: 0.8rem; color: var(--muted); }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .nav-links { display: flex; gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Infinite<span>Technologies</span></a>
+  <span class="badge">Legal</span>
+</header>
+
+<div class="container">
+  <h1 class="page-title">Refund Policy</h1>
+  <p class="meta">Effective date: June 1, 2025 &nbsp;·&nbsp; Infinite Technologies</p>
+
+  <div class="callout green">
+    <strong>Our promise:</strong> We want you to be fully satisfied with our products. If the application is not working for you or does not meet your needs, you may request a full refund within <strong>7 days</strong> of your purchase — no long forms or runarounds.
+  </div>
+
+  <h2>1. Overview</h2>
+  <p>This Refund Policy governs all purchases made through Infinite Technologies' subscription-based SaaS applications. Payments are processed by <strong>Paddle</strong>, our Merchant of Record, and refunds are issued through the same channel.</p>
+
+  <h2>2. Eligibility for a Refund</h2>
+  <p>You are eligible for a full refund if <strong>all</strong> of the following conditions are met:</p>
+  <ul>
+    <li><strong>Time window:</strong> Your refund request is submitted within <strong>7 calendar days</strong> of the original purchase date or subscription renewal date;</li>
+    <li><strong>Valid reason:</strong> The application is not functioning correctly on your setup, or after reasonable use it does not fulfil the purpose you purchased it for;</li>
+    <li><strong>Good-faith attempt:</strong> You have contacted our support team and given us a reasonable opportunity to resolve the issue (at least one support interaction), unless the issue is clearly unresolvable;</li>
+    <li><strong>Subscription type:</strong> The refund applies to the current billing period only. Refunds are not issued retroactively for prior billing periods already paid.</li>
+  </ul>
+
+  <h2>3. Valid Refund Reasons</h2>
+  <p>We consider the following to be valid grounds for a refund:</p>
+  <ul>
+    <li>The application has critical bugs that prevent normal use and we were unable to resolve them within 72 hours of a support report;</li>
+    <li>A core feature described on our website does not work as advertised;</li>
+    <li>The product is fundamentally incompatible with your operating environment (OS, browser, platform) and we are unable to provide a workaround;</li>
+    <li>After genuine use, the product does not fulfil your stated intended use case — provided this was not disclosed before purchase (e.g. in our FAQ or documentation).</li>
+  </ul>
+
+  <h2>4. Non-Refundable Situations</h2>
+  <p>Refunds will not be issued in the following circumstances:</p>
+  <ul>
+    <li>The 7-day refund window has elapsed;</li>
+    <li>The request is made for reasons such as "I changed my mind" without a functional or fitness reason;</li>
+    <li>The account has been suspended or terminated due to a violation of our <a href="terms-of-service.html">Terms of Service</a>;</li>
+    <li>The issue stems from the customer's own environment, misconfiguration, or incompatible third-party software not disclosed to us;</li>
+    <li>The customer purchased a product knowing it was described as incompatible with their use case;</li>
+    <li>Renewal charges where the customer did not cancel before the renewal date (we send a reminder email before each renewal).</li>
+  </ul>
+
+  <div class="callout red">
+    <strong>Important:</strong> Refund requests submitted after the 7-day window will be declined. We recommend reaching out to support immediately if you encounter any issues.
+  </div>
+
+  <h2>5. Refund Timeline</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <strong>Day 0 – Submit your request</strong>
+      <span>Contact us at <a href="mailto:support@infinitechs.online">support@infinitechs.online</a> with your account email, order ID (from Paddle), and a description of the issue.</span>
+    </div>
+    <div class="timeline-item">
+      <strong>Within 24–48 hours</strong>
+      <span>Our team reviews your request and either resolves the issue or approves the refund.</span>
+    </div>
+    <div class="timeline-item">
+      <strong>Refund approved</strong>
+      <span>We initiate the refund through Paddle. You will receive a confirmation email from Paddle.</span>
+    </div>
+    <div class="timeline-item">
+      <strong>5–10 business days</strong>
+      <span>The refund appears in your original payment method (card, bank transfer, etc.) depending on your financial institution.</span>
+    </div>
+  </div>
+
+  <h2>6. How to Request a Refund</h2>
+  <div class="step-grid">
+    <div class="step-card">
+      <strong>Contact Support</strong>
+      <span>Email <a href="mailto:support@infinitechs.online">support@infinitechs.online</a> within 7 days of purchase.</span>
+    </div>
+    <div class="step-card">
+      <strong>Provide Details</strong>
+      <span>Include your account email, Paddle order ID, and a clear description of the problem.</span>
+    </div>
+    <div class="step-card">
+      <strong>Allow Resolution</strong>
+      <span>We'll try to fix the issue first. If unresolvable, your refund is approved.</span>
+    </div>
+    <div class="step-card">
+      <strong>Receive Refund</strong>
+      <span>Processed via Paddle to your original payment method within 5–10 business days.</span>
+    </div>
+  </div>
+
+  <h2>7. Partial Refunds & Pro-Rata</h2>
+  <p>For annual subscriptions, if a refund is requested within the 7-day window, a full refund of the annual fee is issued. We do not offer pro-rata partial refunds for unused months beyond the refund window.</p>
+
+  <h2>8. Subscription Cancellation</h2>
+  <p>Cancelling your subscription is separate from requesting a refund. You may cancel at any time through your account dashboard; cancellation stops future renewals but does not automatically trigger a refund. If you wish a refund, please explicitly request one within the 7-day window.</p>
+
+  <h2>9. Consumer Rights (EU/UK)</h2>
+  <p>If you are a consumer located in the European Union or the United Kingdom, you may have additional statutory rights, including a 14-day right of withdrawal for digital services under EU Directive 2011/83/EU, unless digital content delivery has begun with your prior consent and acknowledgement that this waives your right of withdrawal. By accessing the Service immediately after purchase, you consent to early delivery and acknowledge that the right of withdrawal may no longer apply. In cases of conflict between this policy and applicable consumer protection law, your statutory rights prevail.</p>
+
+  <h2>10. Contact Us</h2>
+  <p>For refund requests or billing questions, reach us at:</p>
+  <ul>
+    <li><strong>Email:</strong> <a href="mailto:support@infinitechs.online">support@infinitechs.online</a></li>
+    <li><strong>Website:</strong> <a href="https://infinitechs.online">infinitechs.online</a></li>
+  </ul>
+  <p>Billing is handled by Paddle (our Merchant of Record). If you need to contact Paddle directly regarding a charge, visit <a href="https://paddle.net" target="_blank">paddle.net</a>.</p>
+
+  <div class="nav-links">
+    <a href="terms-of-service.html">→ Terms of Service</a>
+    <a href="privacy-policy.html">→ Privacy Policy</a>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 Infinite Technologies. All rights reserved.
+</footer>
+
+</body>
+</html>

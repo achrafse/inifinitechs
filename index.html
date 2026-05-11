@@ -56,9 +56,7 @@
       z-index: 0;
       pointer-events: none;
       background-image:
-        /* noise grain via SVG filter */
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
-        /* diagonal grid lines */
         repeating-linear-gradient(
           -45deg,
           transparent,
@@ -173,7 +171,6 @@
       padding-top: 5rem;
     }
 
-    /* Rotating wireframe shape */
     .geo-shape {
       position: absolute;
       top: 50%;
@@ -186,10 +183,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    .geo-shape svg {
-      width: 100%;
-      height: 100%;
-    }
+    .geo-shape svg { width: 100%; height: 100%; }
     @keyframes slowRotate {
       from { transform: translate(-50%, -50%) rotate(0deg); }
       to   { transform: translate(-50%, -50%) rotate(360deg); }
@@ -201,7 +195,6 @@
       padding: clamp(2rem, 6vw, 4rem) 0;
     }
 
-    /* Status badge */
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -230,7 +223,6 @@
       50% { opacity: 0; }
     }
 
-    /* Stacked headline */
     .hero-headline {
       font-family: var(--font-display);
       line-height: 0.88;
@@ -246,9 +238,7 @@
       color: transparent;
       -webkit-text-stroke: 2px var(--white);
     }
-    .hero-headline .line-accent {
-      color: var(--cyan);
-    }
+    .hero-headline .line-accent { color: var(--cyan); }
 
     .hero-sub {
       font-size: clamp(0.85rem, 1.5vw, 1rem);
@@ -258,12 +248,8 @@
       letter-spacing: 0.02em;
       margin-bottom: 3rem;
     }
-    .hero-sub strong {
-      color: var(--white);
-      font-weight: 500;
-    }
+    .hero-sub strong { color: var(--white); font-weight: 500; }
 
-    /* Domain bar */
     .hero-domain-bar {
       position: absolute;
       bottom: 2.2rem;
@@ -278,11 +264,7 @@
       align-items: center;
       gap: 1.2rem;
     }
-    .domain-rule {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .domain-rule { flex: 1; height: 1px; background: var(--border); }
     .domain-text {
       font-family: var(--font-mono);
       font-size: 0.68rem;
@@ -389,7 +371,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* Corner accent */
     .pillar::after {
       content: '';
       position: absolute;
@@ -486,13 +467,8 @@
       flex-shrink: 0;
       margin-left: 0.8rem;
     }
-    .submit-btn:hover {
-      background: var(--white);
-    }
-    .submit-btn:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
+    .submit-btn:hover { background: var(--white); }
+    .submit-btn:disabled { opacity: 0.5; cursor: default; }
 
     .form-success {
       display: none;
@@ -520,24 +496,42 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .footer-copy,
-    .footer-domain {
+    .footer-copy {
       font-family: var(--font-mono);
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       color: var(--muted);
-      text-decoration: none;
     }
-    .footer-domain:hover { color: var(--cyan); }
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-legal a {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-legal a:hover {
+      color: var(--cyan);
+      border-color: rgba(0, 240, 255, 0.4);
+    }
+    .footer-legal-sep {
+      width: 1px;
+      height: 10px;
+      background: var(--border);
+    }
 
     /* ─────────────────────────────────────────────────────────
        UTILITIES
     ───────────────────────────────────────────────────────── */
-    ::selection {
-      background: var(--cyan);
-      color: var(--bg);
-    }
-
+    ::selection { background: var(--cyan); color: var(--bg); }
   </style>
 </head>
 <body>
@@ -559,49 +553,31 @@
   <!-- ─── HERO ────────────────────────────────────────────── -->
   <section id="hero" aria-label="Hero">
 
-    <!-- Rotating wireframe octagon -->
     <div class="geo-shape" aria-hidden="true">
       <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- outer octagon -->
-        <polygon
-          points="191,15 309,15 445,138 445,362 309,485 191,485 55,362 55,138"
-          stroke="#00F0FF" stroke-width="1" fill="none"
-        />
-        <!-- inner octagon -->
-        <polygon
-          points="210,75 290,75 390,162 390,338 290,425 210,425 110,338 110,162"
-          stroke="#00F0FF" stroke-width="0.6" fill="none"
-        />
-        <!-- cross lines -->
+        <polygon points="191,15 309,15 445,138 445,362 309,485 191,485 55,362 55,138" stroke="#00F0FF" stroke-width="1" fill="none"/>
+        <polygon points="210,75 290,75 390,162 390,338 290,425 210,425 110,338 110,162" stroke="#00F0FF" stroke-width="0.6" fill="none"/>
         <line x1="55" y1="250" x2="445" y2="250" stroke="#00F0FF" stroke-width="0.5"/>
         <line x1="250" y1="15" x2="250" y2="485" stroke="#00F0FF" stroke-width="0.5"/>
         <line x1="191" y1="15" x2="309" y2="485" stroke="#00F0FF" stroke-width="0.3"/>
         <line x1="309" y1="15" x2="191" y2="485" stroke="#00F0FF" stroke-width="0.3"/>
-        <!-- center circle -->
         <circle cx="250" cy="250" r="60" stroke="#00F0FF" stroke-width="0.6" fill="none"/>
         <circle cx="250" cy="250" r="4" fill="#00F0FF" opacity="0.6"/>
       </svg>
     </div>
 
     <div class="container hero-content">
-
-      <div class="hero-badge reveal">
-        Status &mdash; Launching Soon
-      </div>
-
+      <div class="hero-badge reveal">Status &mdash; Launching Soon</div>
       <h1 class="hero-headline reveal reveal-delay-1">
         <span class="line">SOMETHING</span>
         <span class="line line-outline">BIG</span>
         <span class="line line-accent">IS COMING.</span>
       </h1>
-
       <p class="hero-sub reveal reveal-delay-2">
         Digital products <strong>engineered for small businesses</strong> that mean business. Built for the real world. Designed for yours.
       </p>
-
     </div>
 
-    <!-- Domain bar -->
     <div class="hero-domain-bar" aria-hidden="true">
       <div class="hero-domain-inner">
         <div class="domain-rule"></div>
@@ -707,6 +683,13 @@
   <footer>
     <div class="container footer-inner">
       <span class="footer-copy">&copy; 2026 Infinite Technologies</span>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="terms-of-service.html">Terms of Service</a>
+        <div class="footer-legal-sep" aria-hidden="true"></div>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <div class="footer-legal-sep" aria-hidden="true"></div>
+        <a href="refund-policy.html">Refund Policy</a>
+      </nav>
     </div>
   </footer>
 
